@@ -78,6 +78,24 @@ async function loadData(){
         }
 
         const data = await response.json();
+        console.log(data.map(x => x["Timestamp"]));
+
+        // ====================================================
+        // URUTKAN BERDASARKAN TANGGAL PENDAFTARAN TERBARU
+        // ====================================================
+        data.sort((a, b) => {
+
+            return parseTimestamp(b["Timestamp"]) - parseTimestamp(a["Timestamp"]);
+
+        });
+
+        console.log("SETELAH SORT");
+            console.table(
+                data.map(x => ({
+                    nama: x["Nama Lengkap"],
+                    waktu: x["Timestamp"]
+                }))
+            );
 
         semuaData = data;
         dataTampil = [...data];
@@ -94,7 +112,6 @@ async function loadData(){
 
         }
 
-        // nanti Bagian 2
         renderData(semuaData);
 
     }
@@ -250,6 +267,38 @@ function formatTanggal(tanggal){
         year:"numeric"
 
     });
+
+}
+
+
+/*====================================================
+PARSE TIMESTAMP GOOGLE FORM
+====================================================*/
+function parseTimestamp(timestamp){
+
+    if(!timestamp) return 0;
+
+    const bagian = timestamp.split(" ");
+
+    const tanggal = bagian[0].split("/");
+    const waktu = (bagian[1] || "00:00:00").split(":");
+
+    const bulan = parseInt(tanggal[0],10) - 1;
+    const hari = parseInt(tanggal[1],10);
+    const tahun = parseInt(tanggal[2],10);
+
+    const jam = parseInt(waktu[0],10);
+    const menit = parseInt(waktu[1],10);
+    const detik = parseInt(waktu[2],10);
+
+    return new Date(
+        tahun,
+        bulan,
+        hari,
+        jam,
+        menit,
+        detik
+    ).getTime();
 
 }
 
@@ -529,6 +578,7 @@ const fotoHtml = foto
 
             <tr>
                 <th>Nama Pasangan</th>
+
                 <td>${item["Nama Istri/Suami"] || "-"}</td>
             </tr>
 
@@ -540,11 +590,6 @@ const fotoHtml = foto
             <tr>
                 <th>Status di GBI</th>
                 <td>${item["Status di GBI Altar Tabernakel Batam"] || "-"}</td>
-            </tr>
-
-            <tr>
-                <th>Tahun Bergabung</th>
-                <td>${item["Bergabung dari Tahun"] || "-"}</td>
             </tr>
 
             <tr>

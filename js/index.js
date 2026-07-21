@@ -9,7 +9,7 @@ GOOGLE APPS SCRIPT API
 ====================================================*/
 
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycbwGMZSggFEol7hhBTdz6JlijVaCAdAtmH-TBrg5EMpHWUYNjPqsGHqUx1U3NWD-mfd8iA/exec";
+"https://script.google.com/macros/s/AKfycbyXAUgX_BwsDrbFzS_mk-nB69EsrjF-5KBm42pzGFlM79KjlOHdqUF4m1VmJS1Cqbq4bQ/exec";
 
 
 /*====================================================
