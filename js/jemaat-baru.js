@@ -9,7 +9,7 @@ Version : 2.0
 SUMBER
 ====================================================*/
 const API_URL =
-"https://script.google.com/macros/s/AKfycbzZJuh3Z3qNhaLLNm46kW7F6XKNL7PRUYpqDOdkJawNzOb-s_Pt954NMRsxghUeIDjp9g/exec";
+"https://script.google.com/macros/s/AKfycbzwI1ZSw2YCTYKmSV4do4FbMghzfOC_z2-dYjTpWGS0Wh4ZyToq-g8bzk8kjxCOSgsjnw/exec";
 
 
 /*====================================================
@@ -66,53 +66,73 @@ async function loadData(){
 
     try{
 
-        const response = await fetch(
-            API_URL + "?action=getJemaatBaru"
-        );
+            const body = new URLSearchParams();
 
-        if(!response.ok){
+            body.append("action","GET_JEMAAT_BARU");
 
-            throw new Error("Gagal mengambil data");
+            const response = await fetch(API_URL,{
+
+                method:"POST",
+
+                body:body
+
+            });
+
+            if(!response.ok){
+
+                throw new Error("Gagal mengambil data");
+
+            }
+
+            const data = await response.json();
+
+            data.sort((a,b)=>{
+
+                return parseTimestamp(b["Timestamp"]) -
+                    parseTimestamp(a["Timestamp"]);
+
+            });
+
+            semuaData = data;
+            dataTampil = [...data];
+
+            totalData.innerHTML = semuaData.length;
+
+            hideLoading();
+
+            if(semuaData.length===0){
+
+                showEmpty();
+                return;
+
+            }
+
+renderData(semuaData);
+
+            data.sort((a,b)=>{
+
+                return parseTimestamp(b["Timestamp"]) - parseTimestamp(a["Timestamp"]);
+
+            });
+
+            semuaData = data;
+            dataTampil = [...data];
+
+            totalData.innerHTML = semuaData.length;
+
+            hideLoading();
+
+            if(semuaData.length===0){
+
+                showEmpty();
+
+                return;
+
+            }
+
+            renderData(semuaData);
 
         }
-
-        const data = await response.json();
-
-        console.log(data.map(x => x["Timestamp"]));
-
-        data.sort((a, b) => {
-
-            return parseTimestamp(b["Timestamp"]) - parseTimestamp(a["Timestamp"]);
-
-        });
-
-        console.log("SETELAH SORT");
-
-        console.table(
-            data.map(x => ({
-                nama: x["Nama Lengkap"],
-                waktu: x["Timestamp"]
-            }))
-        );
-
-        semuaData = data;
-        dataTampil = [...data];
-
-        totalData.innerHTML = semuaData.length;
-
-        hideLoading();
-
-        if(semuaData.length===0){
-
-            showEmpty();
-
-            return;
-
-        }
-
-        renderData(semuaData);
-
-    }
 
     catch(error){
 
