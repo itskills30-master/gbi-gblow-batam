@@ -1,18 +1,15 @@
 /*====================================================
 GBI ALTAR TABERNAKEL BATAM
 JEMAAT BARU
-Version : 1.0
+Version : 2.0
 ====================================================*/
 
 
-*====================================================
-OPEN SHEET
+/*====================================================
+SUMBER
 ====================================================*/
-
-const sheetName = encodeURIComponent("Form Responses 1");
-
-const OPENSHEET_URL =
-`https://opensheet.elk.sh/1LkbYxFptWlUXO2mx-_ZR6AWSDuYe1_7-GO8wLj-cyRw/${sheetName}`;
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzZJuh3Z3qNhaLLNm46kW7F6XKNL7PRUYpqDOdkJawNzOb-s_Pt954NMRsxghUeIDjp9g/exec";
 
 
 /*====================================================
@@ -69,7 +66,9 @@ async function loadData(){
 
     try{
 
-        const response = await fetch(OPENSHEET_URL);
+        const response = await fetch(
+            API_URL + "?action=getJemaatBaru"
+        );
 
         if(!response.ok){
 
@@ -78,11 +77,9 @@ async function loadData(){
         }
 
         const data = await response.json();
+
         console.log(data.map(x => x["Timestamp"]));
 
-        // ====================================================
-        // URUTKAN BERDASARKAN TANGGAL PENDAFTARAN TERBARU
-        // ====================================================
         data.sort((a, b) => {
 
             return parseTimestamp(b["Timestamp"]) - parseTimestamp(a["Timestamp"]);
@@ -90,12 +87,13 @@ async function loadData(){
         });
 
         console.log("SETELAH SORT");
-            console.table(
-                data.map(x => ({
-                    nama: x["Nama Lengkap"],
-                    waktu: x["Timestamp"]
-                }))
-            );
+
+        console.table(
+            data.map(x => ({
+                nama: x["Nama Lengkap"],
+                waktu: x["Timestamp"]
+            }))
+        );
 
         semuaData = data;
         dataTampil = [...data];

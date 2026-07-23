@@ -9,7 +9,7 @@ GOOGLE APPS SCRIPT API
 ====================================================*/
 
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycbyXAUgX_BwsDrbFzS_mk-nB69EsrjF-5KBm42pzGFlM79KjlOHdqUF4m1VmJS1Cqbq4bQ/exec";
+"https://script.google.com/macros/s/AKfycbzZJuh3Z3qNhaLLNm46kW7F6XKNL7PRUYpqDOdkJawNzOb-s_Pt954NMRsxghUeIDjp9g/exec";
 
 
 /*====================================================
@@ -120,7 +120,7 @@ async function checkInstallation(){
             method:"POST",
 
             body:body
-
+            
         });
 
         console.log("Response :", response.status);
