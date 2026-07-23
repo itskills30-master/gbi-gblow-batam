@@ -511,21 +511,24 @@ function showDetail(item){
     console.log("Foto URL :", foto);
 
 const fotoHtml = foto
-    ? `
-        <img
-            src="${foto}"
-            class="detail-avatar"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    ? `
+                    <img
+                        src="${foto}"
+                        class="detail-avatar"
+                        style="cursor:pointer"
+                        onclick="previewFoto('${foto}')"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 
-        <div class="detail-avatar-default" style="display:none;">
-            <i class="fa-solid fa-user"></i>
-        </div>
-      `
-    : `
-        <div class="detail-avatar-default">
-            <i class="fa-solid fa-user"></i>
-        </div>
-      `; 
+                    <div class="detail-avatar-default" style="display:none;">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    `
+                    :
+                    `
+                    <div class="detail-avatar-default">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    `;
 
 
     detailContent.innerHTML = `
@@ -650,6 +653,21 @@ const fotoHtml = foto
     );
 
     canvas.show();
+
+}
+
+/*====================================================
+PREVIEW FOTO
+====================================================*/
+function previewFoto(url){
+
+    document.getElementById("fotoPreview").src = url;
+
+    const modal = new bootstrap.Modal(
+        document.getElementById("fotoModal")
+    );
+
+    modal.show();
 
 }
 
