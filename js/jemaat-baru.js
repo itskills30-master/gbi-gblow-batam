@@ -6,10 +6,10 @@ Version : 2.0
 
 
 /*====================================================
-SUMBER
+API: AMBIL DARI Code.gs
 ====================================================*/
 const API_URL =
-"https://script.google.com/macros/s/AKfycbzwI1ZSw2YCTYKmSV4do4FbMghzfOC_z2-dYjTpWGS0Wh4ZyToq-g8bzk8kjxCOSgsjnw/exec";
+"https://script.google.com/macros/s/AKfycbxHHLu_VP2L1sEphuh5vVbO5Jr-JIojjkziqfwfdt9S-T0FEFHx6iKhrrzHSnmeDVJ6oA/exec";
 
 
 /*====================================================
