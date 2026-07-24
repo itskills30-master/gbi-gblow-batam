@@ -1,0 +1,158 @@
+/*====================================================
+STATISTIK
+GBI ALTAR TABERNAKEL BATAM
+====================================================*/
+
+body{
+
+    background:#f5f7fb;
+
+}
+
+/*====================================================
+CONTAINER
+====================================================*/
+
+.container{
+
+    max-width:430px;
+
+    margin:auto;
+
+}
+
+/*====================================================
+SUMMARY CARD
+====================================================*/
+
+.summary-card{
+
+    border-radius:18px;
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:20px 15px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.10);
+
+    margin-bottom:15px;
+
+    transition:.25s;
+
+}
+
+.summary-card:active{
+
+    transform:scale(.98);
+
+}
+
+.summary-card i{
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+    opacity:.95;
+
+}
+
+.summary-card h2{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    margin-bottom:4px;
+
+}
+
+.summary-card p{
+
+    margin:0;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+/*====================================================
+CHART CARD
+====================================================*/
+
+.chart-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.chart-card h5{
+
+    font-size:17px;
+
+    font-weight:700;
+
+    color:#444;
+
+    margin-bottom:15px;
+
+}
+
+/*====================================================
+CANVAS
+====================================================*/
+
+.chart-card canvas{
+
+    width:100% !important;
+
+    max-height:260px;
+
+}
+
+/*====================================================
+HEADER
+====================================================*/
+
+.navbar{
+
+    border-bottom-left-radius:18px;
+
+    border-bottom-right-radius:18px;
+
+}
+
+/*====================================================
+BOTTOM SPACE
+====================================================*/
+
+body{
+
+    padding-bottom:90px;
+
+}
+
+/*====================================================
+RESPONSIVE
+====================================================*/
+
+@media (min-width:768px){
+
+.container{
+
+    max-width:430px;
+
+}
+
+}
