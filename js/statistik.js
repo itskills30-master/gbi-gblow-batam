@@ -17,6 +17,8 @@ GLOBAL
 ====================================================*/
 let statistik = {};
 
+Chart.register(ChartDataLabels);
+
 let chartGender;
 let chartUmur;
 let chartBaptis;
@@ -45,15 +47,66 @@ document.addEventListener(
 AMBIL DATA
 ====================================================*/
 
-async function loadStatistik(){
+/*====================================================
+AMBIL DATA STATISTIK
+====================================================*/
+
+async function loadStatistik(forceRefresh=false){
 
     try{
+
+        /*==============================
+        CEK CACHE
+        ==============================*/
+
+        if(!forceRefresh){
+
+            const cache = sessionStorage.getItem(
+
+                "STATISTIK"
+
+            );
+
+            if(cache){
+
+                statistik = JSON.parse(cache);
+
+                console.log("STATISTIK : CACHE");
+
+                renderSummary();
+
+                renderPieGender();
+
+                renderPieUmur();
+
+                renderPieBaptis();
+
+                renderPiePernikahan();
+
+                renderPieStatus();
+
+                renderPieKomsel();
+
+                renderBarTahun();
+
+                return;
+
+            }
+
+        }
+
+        /*==============================
+        AMBIL DARI GAS
+        ==============================*/
 
         const body = new URLSearchParams();
 
         body.append(
+
             "action",
+
             "GET_STATISTIK"
+
         );
 
         const response = await fetch(
@@ -84,6 +137,20 @@ async function loadStatistik(){
 
         statistik = hasil.data;
 
+        /*==============================
+        SIMPAN CACHE
+        ==============================*/
+
+        sessionStorage.setItem(
+
+            "STATISTIK",
+
+            JSON.stringify(statistik)
+
+        );
+
+        console.log("STATISTIK : GAS");
+
         renderSummary();
 
         renderPieGender();
@@ -113,6 +180,22 @@ async function loadStatistik(){
 }
 
 /*====================================================
+REFRESH STATISTIK
+====================================================*/
+
+function refreshStatistik(){
+
+    sessionStorage.removeItem(
+
+        "STATISTIK"
+
+    );
+
+    loadStatistik(true);
+
+}
+
+/*====================================================
 SUMMARY
 ====================================================*/
 
@@ -136,6 +219,76 @@ function destroyChart(chart){
         chart.destroy();
 
     }
+
+}
+
+/*====================================================
+OPTION PIE CHART
+====================================================*/
+
+function pieOptions(){
+
+    return{
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        plugins:{
+
+            legend:{
+
+                position:"bottom",
+
+                labels:{
+
+                    usePointStyle:true,
+
+                    padding:20,
+
+                    font:{
+
+                        size:14
+
+                    }
+
+                }
+
+            },
+
+            datalabels:{
+
+                color:"#ffffff",
+
+                font:{
+
+                    size:14,
+
+                    weight:"bold"
+
+                },
+
+                formatter:(value,ctx)=>{
+
+                    const data = ctx.chart.data.datasets[0].data;
+
+                    const total = data.reduce(
+
+                        (a,b)=>a+b,
+
+                        0
+
+                    );
+
+                    return ((value/total)*100).toFixed(1)+"%";
+
+                }
+
+            }
+
+        }
+
+    };
 
 }
 
@@ -192,38 +345,7 @@ function renderPieGender(){
 
             },
 
-            options:{
-
-                responsive:true,
-
-                maintainAspectRatio:false,
-
-                plugins:{
-
-                    legend:{
-
-                        position:"bottom",
-
-                        labels:{
-
-                            usePointStyle:true,
-
-                            padding:20,
-
-                            font:{
-
-                                size:14
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-
+            options:pieOptions()
         }
 
     );
@@ -297,22 +419,7 @@ function renderPieUmur(){
 
             },
 
-            options:{
-
-                responsive:true,
-
-                plugins:{
-
-                    legend:{
-
-                        position:"bottom"
-
-                    }
-
-                }
-
-            }
-
+            options:pieOptions()
         }
 
     );
@@ -367,21 +474,7 @@ function renderPieBaptis(){
 
             },
 
-            options:{
-
-                responsive:true,
-
-                plugins:{
-
-                    legend:{
-
-                        position:"bottom"
-
-                    }
-
-                }
-
-            }
+            options:pieOptions()
 
         }
 
@@ -433,21 +526,7 @@ function renderPiePernikahan(){
 
             },
 
-            options:{
-
-                responsive:true,
-
-                plugins:{
-
-                    legend:{
-
-                        position:"bottom"
-
-                    }
-
-                }
-
-            }
+            options:pieOptions()
 
         }
 
@@ -514,37 +593,7 @@ function renderPieStatus(){
 
             },
 
-            options:{
-
-                responsive:true,
-
-                maintainAspectRatio:false,
-
-                plugins:{
-
-                    legend:{
-
-                        position:"bottom",
-
-                        labels:{
-
-                            usePointStyle:true,
-
-                            padding:18,
-
-                            font:{
-
-                                size:14
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
+            options:pieOptions()
 
         }
 
@@ -600,47 +649,12 @@ function renderPieKomsel(){
 
             },
 
-            options:{
-
-                responsive:true,
-
-                maintainAspectRatio:false,
-
-                plugins:{
-
-                    legend:{
-
-                        position:"bottom",
-
-                        labels:{
-
-                            usePointStyle:true,
-
-                            padding:18,
-
-                            font:{
-
-                                size:14
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-
+            options:pieOptions()
         }
 
     );
 
 }   
-
-/*====================================================
-KEMBALI KE INDEX
-====================================================*/
 
 /*====================================================
 BAR CHART

@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 AMBIL DATA DARI OPENSHEET
 ====================================================*/
 
-async function loadData(){
+async function loadData(forceRefresh=false){
 
     showLoading();
 
@@ -66,73 +66,117 @@ async function loadData(){
 
     try{
 
-            const body = new URLSearchParams();
+        /*==============================
+        CEK CACHE
+        ==============================*/
 
-            body.append("action","GET_JEMAAT_BARU");
+        if(!forceRefresh){
 
-            const response = await fetch(API_URL,{
+            const cache = sessionStorage.getItem(
 
-                method:"POST",
+                "JEMAAT_BARU"
 
-                body:body
+            );
 
-            });
+            if(cache){
 
-            if(!response.ok){
+                const data = JSON.parse(cache);
 
-                throw new Error("Gagal mengambil data");
+                console.log("JEMAAT : CACHE");
 
-            }
+                data.sort((a,b)=>{
 
-            const data = await response.json();
+                    return parseTimestamp(b["Timestamp"]) -
+                           parseTimestamp(a["Timestamp"]);
 
-            data.sort((a,b)=>{
+                });
 
-                return parseTimestamp(b["Timestamp"]) -
-                    parseTimestamp(a["Timestamp"]);
+                semuaData = data;
+                dataTampil = [...data];
 
-            });
+                totalData.innerHTML = semuaData.length;
 
-            semuaData = data;
-            dataTampil = [...data];
+                hideLoading();
 
-            totalData.innerHTML = semuaData.length;
+                if(semuaData.length===0){
 
-            hideLoading();
+                    showEmpty();
+                    return;
 
-            if(semuaData.length===0){
+                }
 
-                showEmpty();
-                return;
-
-            }
-
-renderData(semuaData);
-
-            data.sort((a,b)=>{
-
-                return parseTimestamp(b["Timestamp"]) - parseTimestamp(a["Timestamp"]);
-
-            });
-
-            semuaData = data;
-            dataTampil = [...data];
-
-            totalData.innerHTML = semuaData.length;
-
-            hideLoading();
-
-            if(semuaData.length===0){
-
-                showEmpty();
+                renderData(semuaData);
 
                 return;
 
             }
-
-            renderData(semuaData);
 
         }
+
+        /*==============================
+        AMBIL DARI GAS
+        ==============================*/
+
+        const body = new URLSearchParams();
+
+        body.append(
+
+            "action",
+
+            "GET_JEMAAT_BARU"
+
+        );
+
+        const response = await fetch(API_URL,{
+
+            method:"POST",
+
+            body:body
+
+        });
+
+        if(!response.ok){
+
+            throw new Error("Gagal mengambil data");
+
+        }
+
+        const data = await response.json();
+
+        sessionStorage.setItem(
+
+            "JEMAAT_BARU",
+
+            JSON.stringify(data)
+
+        );
+
+        console.log("JEMAAT : GAS");
+
+        data.sort((a,b)=>{
+
+            return parseTimestamp(b["Timestamp"]) -
+                   parseTimestamp(a["Timestamp"]);
+
+        });
+
+        semuaData = data;
+        dataTampil = [...data];
+
+        totalData.innerHTML = semuaData.length;
+
+        hideLoading();
+
+        if(semuaData.length===0){
+
+            showEmpty();
+            return;
+
+        }
+
+        renderData(semuaData);
+
+    }
 
     catch(error){
 
@@ -143,6 +187,22 @@ renderData(semuaData);
         showError();
 
     }
+
+}
+
+/*====================================================
+REFRESH JEMAAT BARU
+====================================================*/
+
+function refreshJemaatBaru(){
+
+    sessionStorage.removeItem(
+
+        "JEMAAT_BARU"
+
+    );
+
+    loadData(true);
 
 }
 
