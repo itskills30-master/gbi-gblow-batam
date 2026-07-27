@@ -9,7 +9,7 @@ Version : 2.0
 API: AMBIL DARI Code.gs
 ====================================================*/
 const API_URL =
-"https://script.google.com/macros/s/AKfycbxHHLu_VP2L1sEphuh5vVbO5Jr-JIojjkziqfwfdt9S-T0FEFHx6iKhrrzHSnmeDVJ6oA/exec";
+"https://script.google.com/macros/s/AKfycbx1IHvbYLfrzFTPt5oFzyuMB2M_ajF7Tx9FrQe1LgAhpXgje-ARhjj72jebGoUY-8lSXw/exec";
 
 
 /*====================================================
@@ -43,7 +43,11 @@ const refreshBtn = document.getElementById("refreshBtn");
 HALAMAN DIBUKA
 ====================================================*/
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",()=>{
+
+    if(!checkSession()){
+        return;
+    }
 
     loadData();
 
@@ -117,15 +121,21 @@ async function loadData(forceRefresh=false){
         AMBIL DARI GAS
         ==============================*/
 
-        const body = new URLSearchParams();
+        const token =
+            localStorage.getItem("GBI_LOGIN_TOKEN");
 
-        body.append(
 
-            "action",
+            const body = new URLSearchParams();
 
-            "GET_JEMAAT_BARU"
+            body.append(
+                "action",
+                "GET_JEMAAT_BARU"
+            );
 
-        );
+            body.append(
+                "token",
+                token
+            );
 
         const response = await fetch(API_URL,{
 
@@ -436,7 +446,7 @@ function createCard(item,index){
 
     Bergabung sejak: ${formatTanggal(item["Timestamp"])}
 
-</div>
+                </div>
 
             </div>
 
@@ -773,4 +783,3 @@ function showLogoutModal(){
     modal.show();
 
 }
-

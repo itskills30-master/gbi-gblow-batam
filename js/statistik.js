@@ -9,7 +9,7 @@ Version 1.0
 API: AMBIL DARI Statistik.gs
 ====================================================*/
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycbx_znLBmvdnBBPdft8Ia19t0X8ufaV54C3Kl-vd0lq19Uuy80h5reQ54i8E5E3UKTFAog/exec";
+"https://script.google.com/macros/s/AKfycby0h2OrZ5grGAqu1GRE4OAw6rgTr0jL92K1AYHxdECkTPa028vSjuvl_HFw2QZhLmIl8w/exec";
 
 
 /*====================================================
@@ -31,21 +31,15 @@ let chartTahun;
 HALAMAN DIBUKA
 ====================================================*/
 
-document.addEventListener(
+document.addEventListener("DOMContentLoaded",()=>{
 
-    "DOMContentLoaded",
-
-    ()=>{
-
-        loadStatistik();
-
+    if(!checkSession()){
+        return;
     }
 
-);
+    loadStatistik();
 
-/*====================================================
-AMBIL DATA
-====================================================*/
+});
 
 /*====================================================
 AMBIL DATA STATISTIK
@@ -102,12 +96,19 @@ async function loadStatistik(forceRefresh=false){
         const body = new URLSearchParams();
 
         body.append(
+                "action",
+                "GET_STATISTIK"
+            );
 
-            "action",
+            body.append(
+                "token",
+                getLoginToken()
+            );
 
-            "GET_STATISTIK"
-
-        );
+            body.append(
+                "installationId",
+                localStorage.getItem("GBI_INSTALLATION_ID")
+            );
 
         const response = await fetch(
 

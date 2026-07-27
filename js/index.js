@@ -8,25 +8,14 @@ Version : 1.0
 API: AMBIL DARI Code.gs
 ====================================================*/
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycbxHHLu_VP2L1sEphuh5vVbO5Jr-JIojjkziqfwfdt9S-T0FEFHx6iKhrrzHSnmeDVJ6oA/exec";
+"https://script.google.com/macros/s/AKfycbx1IHvbYLfrzFTPt5oFzyuMB2M_ajF7Tx9FrQe1LgAhpXgje-ARhjj72jebGoUY-8lSXw/exec";
 
 
 /*====================================================
 GLOBAL
 ====================================================*/
-
 const INSTALLATION_KEY = "GBI_INSTALLATION_ID";
-
 const STATUS_KEY = "GBI_STATUS";
-
-/*====================================================
-LOCAL STORAGE
-====================================================*/
-
-const TOKEN_KEY = "GBI_LOGIN_TOKEN";
-
-const TOKEN_EXPIRED = "GBI_TOKEN_EXPIRED";
-
 
 /*====================================================
 ELEMENT
@@ -248,25 +237,29 @@ function showAlert(text){
 SHOW PASSWORD
 ====================================================*/
 
-showPassword.addEventListener("click",()=>{
+if(showPassword){
 
-    if(password.type==="password"){
+    showPassword.addEventListener("click",()=>{
 
-        password.type="text";
+        if(password.type==="password"){
 
-        showPassword.innerHTML=
-        '<i class="fa-solid fa-eye-slash"></i>';
+            password.type="text";
 
-    }else{
+            showPassword.innerHTML =
+            '<i class="fa-solid fa-eye-slash"></i>';
 
-        password.type="password";
+        }else{
 
-        showPassword.innerHTML=
-        '<i class="fa-solid fa-eye"></i>';
+            password.type="password";
 
-    }
+            showPassword.innerHTML =
+            '<i class="fa-solid fa-eye"></i>';
 
-});
+        }
+
+    });
+
+}
 
 /*====================================================
 REGISTER
@@ -655,64 +648,6 @@ async function sha256(text){
     return Array.from(new Uint8Array(hash))
         .map(b=>b.toString(16).padStart(2,"0"))
         .join("");
-
-}
-
-/*====================================================
-LOGIN TOKEN
-====================================================*/
-
-function saveLogin(token,expired){
-
-    localStorage.setItem(TOKEN_KEY,token);
-
-    localStorage.setItem(TOKEN_EXPIRED,expired);
-
-}
-
-function getLoginToken(){
-
-    return localStorage.getItem(TOKEN_KEY);
-
-}
-
-function getExpired(){
-
-    return localStorage.getItem(TOKEN_EXPIRED);
-
-}
-
-function clearLogin(){
-
-    localStorage.removeItem(TOKEN_KEY);
-
-    localStorage.removeItem(TOKEN_EXPIRED);
-
-}
-
-/*====================================================
-CEK TOKEN
-====================================================*/
-
-function hasLogin(){
-
-    const token=getLoginToken();
-
-    const expired=getExpired();
-
-    if(!token) return false;
-
-    if(!expired) return false;
-
-    if(Date.now()>Number(expired)){
-
-        clearLogin();
-
-        return false;
-
-    }
-
-    return true;
 
 }
 
