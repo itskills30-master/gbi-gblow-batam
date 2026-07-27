@@ -543,20 +543,31 @@ SEARCH
 
 searchInput.addEventListener("keyup",()=>{
 
-    const keyword = searchInput.value.toLowerCase();
+    const keyword = searchInput.value.trim().toLowerCase();
 
     const hasil = semuaData.filter(item=>{
 
-        return (item["Nama Lengkap"] || "")
-        .toLowerCase()
-        .includes(keyword);
+        return [
+
+            item["Nama Lengkap"],
+            item["Alamat Lengkap"],
+            item["Nomor Telepon"],
+            item["Pekerjaan"],
+            item["Tempat Lahir"],
+            item["Status di GBI Altar Tabernakel Batam"],
+            item["Apakah Sudah Baptis Selam"]
+
+        ]
+        .filter(Boolean)
+        .some(value =>
+            value.toString().toLowerCase().includes(keyword)
+        );
 
     });
 
     renderData(hasil);
 
 });
-
 
 /*====================================================
 DETAIL JEMAAT
