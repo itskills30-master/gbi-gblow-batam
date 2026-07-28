@@ -1,8 +1,34 @@
 /*====================================================
 GBI ALTAR TABERNAKEL BATAM
 AUTH SYSTEM
-Version : 1.0
 ====================================================*/
+
+/*
+====================================================
+APP VERSION
+
+Naikkan versi setiap ada perubahan
+yang mempengaruhi cache/session.
+====================================================*/
+/*====================================================
+APP VERSION
+
+Versi 1.0.0 = Aplikasi pertama (Release Awal)
+Versi 1.0.1 = Perbaikan Bug
+Versi 1.0.2 = Optimasi
+Versi 1.0.3 = Penambahan Fitur Kecil
+Versi 1.0.4 = Perbaikan Keamanan
+Versi 1.0.5 = Optimasi Performa
+Versi 1.0.6 = Perubahan Tampilan (UI/UX)
+Versi 1.0.7 = Penambahan Menu / Halaman Baru
+Versi 1.0.8 = Penambahan Struktur Data
+Versi 1.0.9 = Penyempurnaan Sistem
+Versi 1.1.0 = Update Besar (Major Update)
+
+Naikkan versi setiap ada perubahan
+yang mempengaruhi cache/session.
+====================================================*/
+const APP_VERSION = "1.0.0";
 
 
 /*====================================================
@@ -62,20 +88,14 @@ function clearLogin(){
 
 }
 
-
 /*====================================================
 CEK SESSION
 ====================================================*/
 
 function checkSession(){
 
-    const token =
-    getLoginToken();
-
-
-    const expired =
-    getExpired();
-
+    const token = getLoginToken();
+    const expired = getExpired();
 
     if(!token || !expired){
 
@@ -83,30 +103,48 @@ function checkSession(){
 
         sessionStorage.clear();
 
-        window.location.href =
-        "index.html";
+        window.location.href = "index.html";
 
         return false;
 
     }
 
-
-    if(
-        Date.now() >
-        Number(expired)
-    ){
+    if(Date.now() > Number(expired)){
 
         clearLogin();
 
         sessionStorage.clear();
 
-        window.location.href =
-        "index.html";
+        window.location.href = "index.html";
 
         return false;
 
     }
 
+    /*====================================================
+    CEK VERSI APLIKASI
+    ====================================================*/
+
+    const oldVersion =
+        sessionStorage.getItem("APP_VERSION");
+
+    if(oldVersion !== APP_VERSION){
+
+        console.log(
+            "Versi aplikasi berubah :",
+            oldVersion,
+            "→",
+            APP_VERSION
+        );
+
+        sessionStorage.clear();
+
+        sessionStorage.setItem(
+            "APP_VERSION",
+            APP_VERSION
+        );
+
+    }
 
     return true;
 

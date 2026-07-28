@@ -9,7 +9,7 @@ Version : 2.0
 API: AMBIL DARI Code.gs
 ====================================================*/
 const API_URL =
-"https://script.google.com/macros/s/AKfycbx1IHvbYLfrzFTPt5oFzyuMB2M_ajF7Tx9FrQe1LgAhpXgje-ARhjj72jebGoUY-8lSXw/exec";
+"https://script.google.com/macros/s/AKfycbz9Ht4aLy8DTlyRRAF19xLQyQe8OT-9jcJjWU1-PebY8U3bCRo89PX-RtojeKBZBt6rSw/exec";
 
 
 /*====================================================
@@ -44,6 +44,9 @@ HALAMAN DIBUKA
 ====================================================*/
 
 document.addEventListener("DOMContentLoaded",()=>{
+
+    document.getElementById("appVersion").textContent =
+        "Version " + APP_VERSION;
 
     if(!checkSession()){
         return;
@@ -205,15 +208,10 @@ REFRESH JEMAAT BARU
 ====================================================*/
 
 function refreshJemaatBaru(){
-
     sessionStorage.removeItem(
-
         "JEMAAT_BARU"
-
     );
-
     loadData(true);
-
 }
 
 
@@ -656,6 +654,11 @@ const fotoHtml = foto
             <tr>
                 <th>Nomor Telepon</th>
                 <td>${item["Nomor Telepon"] || "-"}</td>
+            </tr>
+
+            <tr>
+                <th>Email</th>
+                <td>${item["Email Address"] || "-"}</td>
             </tr>
 
             <tr>

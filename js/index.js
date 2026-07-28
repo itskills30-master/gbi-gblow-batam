@@ -8,7 +8,7 @@ Version : 1.0
 API: AMBIL DARI Code.gs
 ====================================================*/
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycbx1IHvbYLfrzFTPt5oFzyuMB2M_ajF7Tx9FrQe1LgAhpXgje-ARhjj72jebGoUY-8lSXw/exec";
+"https://script.google.com/macros/s/AKfycbz9Ht4aLy8DTlyRRAF19xLQyQe8OT-9jcJjWU1-PebY8U3bCRo89PX-RtojeKBZBt6rSw/exec";
 
 
 /*====================================================
@@ -20,31 +20,20 @@ const STATUS_KEY = "GBI_STATUS";
 /*====================================================
 ELEMENT
 ====================================================*/
-
 const registerBox = document.getElementById("registerBox");
-
 const pendingBox = document.getElementById("pendingBox");
-
 const loginBox = document.getElementById("loginBox");
-
 const loadingBox = document.getElementById("loadingBox");
-
 const alertBox = document.getElementById("alertBox");
-
 const registerForm = document.getElementById("registerForm");
-
 const loginForm = document.getElementById("loginForm");
-
 const loginNomor = document.getElementById("loginNomor");
-
 const showPassword = document.getElementById("showPassword");
-
 const password = document.getElementById("password");
 
 /*====================================================
 START
 ====================================================*/
-
 document.addEventListener("DOMContentLoaded",()=>{
 
     init();
@@ -55,7 +44,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 /*====================================================
 INIT
 ====================================================*/
-
 function init(){
 
     hideAll();
@@ -64,69 +52,42 @@ function init(){
 
 }
 
-
 /*====================================================
-CEK INSTALLATION ID
+CEK INSTALLATION ID/CEK STATUS KE SERVER
 ====================================================*/
-
-/*====================================================
-CEK STATUS KE SERVER
-====================================================*/
-
 async function checkInstallation(){
-
     const installationId = localStorage.getItem(INSTALLATION_KEY);
-
     console.log("Installation ID :", installationId);
 
     if(!installationId){
-
         console.log("Belum ada Installation ID");
-
         hideAll();
         registerBox.classList.remove("d-none");
         return;
-
     }
-
     showLoading();
-
     try{
-
         const body = new URLSearchParams({
-
             action:"CHECK_STATUS",
-
             installationId:installationId
-
         });
 
         console.log("Mengirim CHECK_STATUS...");
-
         const response = await fetch(GAS_URL,{
-
             method:"POST",
-
             body:body
-            
         });
 
         console.log("Response :", response.status);
-
         const result = await response.json();
-
         console.log("Result :", result);
 
         hideAll();
 
         if(!result.success){
-
             console.log("Belum terdaftar");
-
             registerBox.classList.remove("d-none");
-
             return;
-
         }
 
         if(result.status=="PENDING"){
