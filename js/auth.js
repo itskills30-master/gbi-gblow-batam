@@ -113,19 +113,14 @@ function checkSession(){
 }
 
 function hasLogin(){
-
     const token=getLoginToken();
-
     const expired=getExpired();
-
     if(!token) return false;
-
     if(!expired) return false;
 
     if(Date.now()>Number(expired)){
-
         clearLogin();
-
+        sessionStorage.clear();
         return false;
 
     }
