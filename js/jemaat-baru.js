@@ -154,32 +154,24 @@ async function loadData(forceRefresh=false){
 
         }
 
-        const hasil = await response.json();
+        const data = await response.json();
 
-            if(!hasil.success){
+        sessionStorage.setItem(
 
-                throw new Error(hasil.message);
+            "JEMAAT_BARU",
 
-            }
+            JSON.stringify(data)
 
-            const data = hasil.data;
+        );
 
-            sessionStorage.setItem(
+        console.log("JEMAAT : GAS");
 
-                "JEMAAT_BARU",
+        data.sort((a,b)=>{
 
-                JSON.stringify(data)
+            return parseTimestamp(b["Timestamp"]) -
+                   parseTimestamp(a["Timestamp"]);
 
-            );
-
-            console.log("JEMAAT : GAS");
-
-            data.sort((a,b)=>{
-
-                return parseTimestamp(b["Timestamp"]) -
-                    parseTimestamp(a["Timestamp"]);
-
-            });
+        });
 
         semuaData = data;
         dataTampil = [...data];
