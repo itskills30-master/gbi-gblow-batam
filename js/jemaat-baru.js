@@ -208,6 +208,7 @@ REFRESH JEMAAT BARU
 ====================================================*/
 
 function refreshJemaatBaru(){
+    console.log("REFRESH JEMAAT BARU DIKLIK");
     sessionStorage.removeItem(
         "JEMAAT_BARU"
     );
