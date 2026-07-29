@@ -27,11 +27,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
         <div class="d-flex align-items-center">
 
-            <img src="https://via.placeholder.com/45"
-            alt="Logo"
-            width="30"
-            height="30"
-            class="me-3">
+            <img src="img/logo.png"
+            width="60"
+            height="50"
+            class="me-3"
+            onerror="this.style.display='none'">
+            
 
             <div>
 
@@ -40,7 +41,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
                 </h6>
 
                 <small>
-                    Data Jemaat Baru
+                    Data Jemaat Gereja
                 </small>
 
             </div>
@@ -48,7 +49,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         <div class="d-flex gap-2">
     <button
     class="btn btn-primary navbar-btn"
-        onclick="loadData()"
+        onclick="refreshJemaatBaru()"
+
         title="Refresh Data"
         aria-label="Refresh Data">
 
