@@ -8,7 +8,7 @@ Version : 1.0
 API: AMBIL DARI Code.gs
 ====================================================*/
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycbzyEpKG_gEqb86yi0aF7siYmCi70F2BQjGHIMKYzPUdClCGJXeWVPhtXRDrfzRIVUr6Og/exec";
+"https://script.google.com/macros/s/AKfycbxXcMY430WT8mWGarm-dEPQAsSjya75_9gte1uSn2p03LMoPZjwZwedemHpOmJjYFt3ow/exec";
 
 
 /*====================================================
