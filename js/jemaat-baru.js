@@ -156,6 +156,10 @@ async function loadData(forceRefresh=false){
 
         const data = await response.json();
 
+        console.log("ISI RESPONSE :", data);
+        console.log("TIPE :", typeof data);
+        console.log("IS ARRAY :", Array.isArray(data));
+
         sessionStorage.setItem(
 
             "JEMAAT_BARU",
