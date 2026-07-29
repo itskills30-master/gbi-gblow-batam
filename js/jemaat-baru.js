@@ -159,6 +159,7 @@ async function loadData(forceRefresh=false){
         console.log("ISI RESPONSE :", data);
         console.log("TIPE :", typeof data);
         console.log("IS ARRAY :", Array.isArray(data));
+        console.log("RESPONSE GAS =", data);
 
         sessionStorage.setItem(
 
