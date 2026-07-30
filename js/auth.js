@@ -28,7 +28,7 @@ Versi 1.1.0 = Update Besar (Major Update)
 Naikkan versi setiap ada perubahan
 yang mempengaruhi cache/session.
 ====================================================*/
-const APP_VERSION = "1.0.7";
+const APP_VERSION = "1.0.8";
 
 
 /*====================================================
@@ -164,6 +164,77 @@ function hasLogin(){
     }
 
     return true;
+
+}
+
+/*====================================================
+PANEL BERDASARKAN ROLE
+====================================================*/
+
+async function aturMenuPanel(){
+
+    const menuPanel =
+        document.getElementById("menuPanel");
+
+    if(!menuPanel){
+        return;
+    }
+
+    const token =
+        localStorage.getItem(AUTH_TOKEN_KEY);
+
+    if(!token){
+
+        menuPanel.classList.add("d-none");
+
+        return;
+    }
+
+    try{
+
+        const body = new URLSearchParams();
+
+        body.append("action","GET_ROLE");
+        body.append("token",token);
+
+        const response =
+            await fetch(API_URL,{
+
+                method:"POST",
+
+                body:body
+
+            });
+
+        const data =
+            await response.json();
+
+        console.log("ROLE PANEL :",data);
+
+        if(
+            data.success === true &&
+            data.role === "PASTOR"
+        ){
+
+            menuPanel.classList.remove("d-none");
+
+        }else{
+
+            menuPanel.classList.add("d-none");
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Gagal cek role Panel:",
+            error
+        );
+
+        menuPanel.classList.add("d-none");
+
+    }
 
 }
 
