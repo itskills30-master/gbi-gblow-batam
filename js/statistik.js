@@ -35,9 +35,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(!checkSession()){
         return;
     }
-
     aturMenuPanel();
-
+    loadStatistik();
 });
 
 /*====================================================
