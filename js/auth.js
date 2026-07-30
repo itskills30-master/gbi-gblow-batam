@@ -3,6 +3,9 @@ GBI ALTAR TABERNAKEL BATAM
 AUTH SYSTEM
 ====================================================*/
 
+const API_URL =
+"https://script.google.com/macros/s/AKfycby50T7w-eEqou9m1ZeAWIrkjCvYgC5UR8_Xlq6g8pRLvLzyXn4OCB9dM-0dTyK_EP53NA/exec";
+
 /*
 ====================================================
 APP VERSION
@@ -28,7 +31,7 @@ Versi 1.1.0 = Update Besar (Major Update)
 Naikkan versi setiap ada perubahan
 yang mempengaruhi cache/session.
 ====================================================*/
-const APP_VERSION = "1.0.8";
+const APP_VERSION = "1.0.9";
 
 
 /*====================================================
