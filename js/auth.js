@@ -183,8 +183,7 @@ async function aturMenuPanel(){
         return;
     }
 
-    const token =
-        localStorage.getItem(AUTH_TOKEN_KEY);
+    const token = getLoginToken();
 
     if(!token){
 
@@ -197,33 +196,47 @@ async function aturMenuPanel(){
 
         const body = new URLSearchParams();
 
-        body.append("action","GET_ROLE");
-        body.append("token",token);
+        body.append(
+            "action",
+            "GET_ROLE"
+        );
+
+        body.append(
+            "token",
+            token
+        );
 
         const response =
-            await fetch(API_URL,{
-
-                method:"POST",
-
-                body:body
-
-            });
+            await fetch(
+                API_URL,
+                {
+                    method:"POST",
+                    body:body
+                }
+            );
 
         const data =
             await response.json();
 
-        console.log("ROLE PANEL :",data);
+        console.log(
+            "ROLE PANEL :",
+            data
+        );
 
         if(
             data.success === true &&
             data.role === "PASTOR"
         ){
 
-            menuPanel.classList.remove("d-none");
+            menuPanel.classList.remove(
+                "d-none"
+            );
 
         }else{
 
-            menuPanel.classList.add("d-none");
+            menuPanel.classList.add(
+                "d-none"
+            );
 
         }
 
@@ -235,7 +248,9 @@ async function aturMenuPanel(){
             error
         );
 
-        menuPanel.classList.add("d-none");
+        menuPanel.classList.add(
+            "d-none"
+        );
 
     }
 
