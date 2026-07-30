@@ -732,3 +732,14 @@ body{
     padding-bottom:80px;
 
 }
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.bottom-nav a {
+    flex: 1;
+    text-align: center;
+}
