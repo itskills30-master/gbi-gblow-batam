@@ -28,7 +28,7 @@ Versi 1.1.0 = Update Besar (Major Update)
 Naikkan versi setiap ada perubahan
 yang mempengaruhi cache/session.
 ====================================================*/
-const APP_VERSION = "1.0.4";
+const APP_VERSION = "1.0.5";
 
 
 /*====================================================

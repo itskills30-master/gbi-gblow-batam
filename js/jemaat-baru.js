@@ -8,7 +8,7 @@ JEMAAT BARU
 API: AMBIL DARI Code.gs
 ====================================================*/
 const API_URL =
-"https://script.google.com/macros/s/AKfycbz_9fWGV72_KEneXI3cDgY9ekav16xXZo8LVXV0A1bpGV7sGJubez2-mvbaMLvcu0-rAg/exec";
+"https://script.google.com/macros/s/AKfycby50T7w-eEqou9m1ZeAWIrkjCvYgC5UR8_Xlq6g8pRLvLzyXn4OCB9dM-0dTyK_EP53NA/exec";
 
 
 /*====================================================
@@ -42,6 +42,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(!checkSession()){
         return;
     }
+
+    aturMenuPanel();
 
     loadData();
 
@@ -781,7 +783,7 @@ function showLogoutModal(){
 
 }
 
-function aturMenuPanel(){
+async function aturMenuPanel(){
 
     const menuPanel =
         document.getElementById("menuPanel");
@@ -790,18 +792,77 @@ function aturMenuPanel(){
         return;
     }
 
-    const role =
-        localStorage.getItem("GBI_USER_ROLE");
+    const token =
+        localStorage.getItem(AUTH_TOKEN_KEY);
 
-    console.log("ROLE USER :", role);
-
-    if(role === "PASTOR"){
-
-        menuPanel.classList.remove("d-none");
-
-    }else{
+    if(!token){
 
         menuPanel.classList.add("d-none");
+
+        return;
+
+    }
+
+    try{
+
+        const body =
+            new URLSearchParams();
+
+        body.append(
+            "action",
+            "GET_ROLE"
+        );
+
+        body.append(
+            "token",
+            token
+        );
+
+        const response =
+            await fetch(API_URL,{
+
+                method:"POST",
+
+                body:body
+
+            });
+
+        const data =
+            await response.json();
+
+        console.log(
+            "ROLE PANEL :",
+            data
+        );
+
+        if(
+            data.success === true &&
+            data.role === "PASTOR"
+        ){
+
+            menuPanel.classList.remove(
+                "d-none"
+            );
+
+        }else{
+
+            menuPanel.classList.add(
+                "d-none"
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Gagal cek role Panel:",
+            error
+        );
+
+        menuPanel.classList.add(
+            "d-none"
+        );
 
     }
 
