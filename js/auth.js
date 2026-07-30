@@ -3,6 +3,8 @@ GBI ALTAR TABERNAKEL BATAM
 AUTH SYSTEM
 ====================================================*/
 
+const AUTH_API_URL =
+"https://script.google.com/macros/s/AKfycby50T7w-eEqou9m1ZeAWIrkjCvYgC5UR8_Xlq6g8pRLvLzyXn4OCB9dM-0dTyK_EP53NA/exec";
 
 /*
 ====================================================
@@ -205,13 +207,13 @@ async function aturMenuPanel(){
         );
 
         const response =
-            await fetch(
-                API_URL,
-                {
-                    method:"POST",
-                    body:body
-                }
-            );
+    await fetch(
+        AUTH_API_URL,
+        {
+            method:"POST",
+            body:body
+        }
+    );
 
         const data =
             await response.json();
