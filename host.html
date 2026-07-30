@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>Kelola Host</title>
+
+<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container mt-3">
+
+    <div class="d-flex align-items-center mb-3">
+
+        <button
+            class="btn btn-light me-2"
+            onclick="history.back()">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+        <h3 class="fw-bold mb-0">
+
+            <i class="fa-solid fa-users"></i>
+
+            Kelola Host
+
+        </h3>
+
+    </div>
+
+    <div id="loadingHost"
+         class="text-center py-5">
+
+        <div class="spinner-border"></div>
+
+        <div class="mt-2">
+            Memuat data Host...
+        </div>
+
+    </div>
+
+    <div id="errorHost"
+         class="alert alert-danger d-none">
+    </div>
+
+    <div id="emptyHost"
+         class="text-center text-muted py-5 d-none">
+
+        <i class="fa-solid fa-users-slash fa-2x mb-2"></i>
+
+        <div>
+            Belum ada akun Host.
+        </div>
+
+    </div>
+
+    <div id="listHost"></div>
+
+</div>
+
+<script src="auth.js"></script>
+<script src="host.js"></script>
+
+</body>
+
+</html>
