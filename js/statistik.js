@@ -1,7 +1,6 @@
 /*====================================================
 GBI ALTAR TABERNAKEL BATAM
-STATISTIK
-Version 1.0
+STATISTIK
 ====================================================*/
 
 
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         return;
     }
 
-    loadStatistik();
+    aturMenuPanel();
 
 });
 
