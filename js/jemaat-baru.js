@@ -1,7 +1,6 @@
 /*====================================================
 GBI ALTAR TABERNAKEL BATAM
 JEMAAT BARU
-Version : 2.0
 ====================================================*/
 
 
@@ -9,7 +8,7 @@ Version : 2.0
 API: AMBIL DARI Code.gs
 ====================================================*/
 const API_URL =
-"https://script.google.com/macros/s/AKfycbxXcMY430WT8mWGarm-dEPQAsSjya75_9gte1uSn2p03LMoPZjwZwedemHpOmJjYFt3ow/exec";
+"https://script.google.com/macros/s/AKfycbz_9fWGV72_KEneXI3cDgY9ekav16xXZo8LVXV0A1bpGV7sGJubez2-mvbaMLvcu0-rAg/exec";
 
 
 /*====================================================
@@ -23,21 +22,13 @@ let dataTampil = [];
 /*====================================================
 ELEMENT
 ====================================================*/
-
 const loadingBox = document.getElementById("loadingBox");
-
 const errorBox = document.getElementById("errorBox");
-
 const emptyBox = document.getElementById("emptyBox");
-
 const listJemaat = document.getElementById("listJemaat");
-
 const totalData = document.getElementById("totalData");
-
 const searchInput = document.getElementById("searchInput");
-
 const refreshBtn = document.getElementById("refreshBtn");
-
 
 /*====================================================
 HALAMAN DIBUKA
@@ -790,5 +781,31 @@ function showLogoutModal(){
     );
 
     modal.show();
+
+}
+
+function aturMenuPanel(){
+
+    const menuPanel =
+        document.getElementById("menuPanel");
+
+    if(!menuPanel){
+        return;
+    }
+
+    const role =
+        localStorage.getItem("GBI_USER_ROLE");
+
+    console.log("ROLE USER :", role);
+
+    if(role === "PASTOR"){
+
+        menuPanel.classList.remove("d-none");
+
+    }else{
+
+        menuPanel.classList.add("d-none");
+
+    }
 
 }
