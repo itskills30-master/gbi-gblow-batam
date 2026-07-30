@@ -153,11 +153,8 @@ async function loadData(forceRefresh=false){
         console.log("RESPONSE GAS =", data);
 
         sessionStorage.setItem(
-
             "JEMAAT_BARU",
-
             JSON.stringify(data)
-
         );
 
         console.log("JEMAAT : GAS");
