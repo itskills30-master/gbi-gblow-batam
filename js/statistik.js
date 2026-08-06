@@ -1,6 +1,6 @@
 /*====================================================
 GBI ALTAR TABERNAKEL BATAM
-STATISTIK
+STATISTIK
 ====================================================*/
 
 
@@ -8,7 +8,7 @@ STATISTIK
 API: AMBIL DARI Statistik.gs
 ====================================================*/
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycby0h2OrZ5grGAqu1GRE4OAw6rgTr0jL92K1AYHxdECkTPa028vSjuvl_HFw2QZhLmIl8w/exec";
+"https://script.google.com/macros/s/AKfycbwoLiYK7nzn7eQRlTJ2FTdaHE3fm0WXAPKraVsNmD9alyv-c5QH2Fssl7VQcYQssgN-FA/exec";
 
 
 /*====================================================

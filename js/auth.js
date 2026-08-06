@@ -4,7 +4,7 @@ AUTH SYSTEM
 ====================================================*/
 
 const AUTH_API_URL =
-"https://script.google.com/macros/s/AKfycby50T7w-eEqou9m1ZeAWIrkjCvYgC5UR8_Xlq6g8pRLvLzyXn4OCB9dM-0dTyK_EP53NA/exec";
+"https://script.google.com/macros/s/AKfycbxRmv1uHf_AB9vPSwCVDkI2AArrbRJQY49nQS5ERw28CAtZg7DJmo0CqflPLpgZhEkt/exec";
 
 /*
 ====================================================
@@ -31,7 +31,7 @@ Versi 1.1.0 = Update Besar (Major Update)
 Naikkan versi setiap ada perubahan
 yang mempengaruhi cache/session.
 ====================================================*/
-const APP_VERSION = "1.0.11";
+const APP_VERSION = "1.0.13";
 
 
 /*====================================================

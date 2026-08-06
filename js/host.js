@@ -3,7 +3,7 @@ KONFIGURASI
 ====================================================*/
 
 const HOST_API_URL = 
-"https://script.google.com/macros/s/AKfycbz_9fWGV72_KEneXI3cDgY9ekav16xXZo8LVXV0A1bpGV7sGJubez2-mvbaMLvcu0-rAg/exec";
+"https://script.google.com/macros/s/AKfycbxRmv1uHf_AB9vPSwCVDkI2AArrbRJQY49nQS5ERw28CAtZg7DJmo0CqflPLpgZhEkt/exec";
 
 
 /*====================================================
