@@ -1,60 +1,414 @@
-.host-card{
-    border:none;
-    border-radius:18px;
-    margin-bottom:18px;
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-    overflow:hidden;
-    background:#fff;
+/* ============================================
+   GLOBAL STYLE
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.host-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:10px;
+body {
+    background: #f4f6fc;
+    font-family: -apple-system, 'Segoe UI', Roboto, system-ui, sans-serif;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
 }
 
-.host-name{
-    font-size:18px;
-    font-weight:700;
-    color:#1e293b;
+/* ============================================
+   UTILITY CLASSES (Pengganti Bootstrap)
+   ============================================ */
+.d-none {
+    display: none !important;
 }
 
-.host-info{
-    color:#64748b;
-    font-size:14px;
-    margin-bottom:4px;
+.text-center {
+    text-align: center !important;
 }
 
-.host-select{
-    border-radius:12px;
-    font-weight:600;
-    margin-top:10px;
+.text-muted {
+    color: #64748b !important;
 }
 
-.btn-delete-host{
-    width:100%;
-    border-radius:12px;
-    margin-top:12px;
-    font-weight:600;
+.text-danger {
+    color: #dc2626 !important;
 }
 
-.badge-host{
-    padding:8px 14px;
-    border-radius:50px;
-    color:#fff;
-    font-size:12px;
-    font-weight:bold;
+.fw-bold {
+    font-weight: 700 !important;
 }
 
-.badge-aktif{
-    background:#16a34a;
+.small {
+    font-size: 13px !important;
 }
 
-.badge-pending{
-    background:#eab308;
+.mt-3 {
+    margin-top: 16px !important;
 }
 
-.badge-blokir{
-    background:#dc2626;
+/* ============================================
+   NAVBAR CUSTOM
+   ============================================ */
+.navbar-custom {
+    background: #0d6efd;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+}
+
+.btn-back,
+.btn-refresh {
+    background: white;
+    border: none;
+    border-radius: 40px;
+    padding: 8px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #0d6efd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-back:active,
+.btn-refresh:active {
+    transform: scale(0.92);
+}
+
+.navbar-title {
+    color: white;
+    text-align: center;
+    flex: 1;
+}
+
+.navbar-title h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.navbar-title h5 i {
+    margin-right: 6px;
+}
+
+.navbar-title small {
+    font-size: 12px;
+    opacity: 0.9;
+    display: block;
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+.container-custom {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 16px 14px 30px;
+}
+
+/* ============================================
+   STATUS MESSAGE (Loading / Error / Empty)
+   ============================================ */
+.status-message {
+    text-align: center;
+    padding: 50px 20px;
+    color: #64748b;
+}
+
+.status-message i {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.status-message .icon-danger {
+    color: #dc2626;
+}
+
+.status-message .icon-secondary {
+    color: #94a3b8;
+}
+
+.status-message p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+/* ============================================
+   SPINNER (Pengganti Bootstrap)
+   ============================================ */
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #0d6efd;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ============================================
+   HOST CARD
+   ============================================ */
+.host-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 18px 16px 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(0, 20, 80, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    animation: fadeUp 0.35s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   HEADER CARD
+   ============================================ */
+.host-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding: 0 4px;
+}
+
+.host-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0b1e3a;
+    letter-spacing: -0.3px;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.host-name small {
+    font-weight: 400;
+    font-size: 14px;
+    color: #94a3b8;
+    margin-left: 6px;
+}
+
+/* ============================================
+   BADGE STATUS
+   ============================================ */
+.badge-host {
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.badge-aktif {
+    background: #dff0e2;
+    color: #0e7a3a;
+    border: 1px solid #b2d9b9;
+}
+
+.badge-pending {
+    background: #fff3d1;
+    color: #a67c1e;
+    border: 1px solid #f0d58c;
+}
+
+.badge-blokir {
+    background: #fde8e8;
+    color: #b91c1c;
+    border: 1px solid #f5c2c2;
+}
+
+/* ============================================
+   INFO HOST (Dengan Garis Pemisah)
+   ============================================ */
+.host-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0 14px;
+    padding: 12px 12px 10px;
+    border-top: 2px solid #eef2f8;
+    border-bottom: 2px solid #eef2f8;
+    background: #fafcff;
+    border-radius: 12px;
+}
+
+.host-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #1e293b;
+    padding: 2px 0;
+}
+
+.host-info-item i {
+    width: 20px;
+    color: #4b5c7a;
+    font-size: 15px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.host-info-item .label {
+    color: #64748b;
+    font-weight: 500;
+    min-width: 70px;
+    flex-shrink: 0;
+}
+
+.host-info-item .value {
+    font-weight: 500;
+    color: #0b1e3a;
+    word-break: break-word;
+    flex: 1;
+}
+
+/* ============================================
+   LOGIN TIME (Warna Khusus)
+   ============================================ */
+.host-info-item .login-time {
+    color: #0b5e8a;
+    font-weight: 600;
+    font-size: 13px;
+    background: #eef6fd;
+    padding: 2px 12px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* ============================================
+   TOMBOL AKSI
+   ============================================ */
+.host-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 0 4px;
+}
+
+.btn-host {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-host:active {
+    transform: scale(0.96);
+}
+
+.btn-host i {
+    font-size: 15px;
+}
+
+.btn-host-aktif {
+    background: #e5f4eb;
+    color: #0e7a3a;
+}
+
+.btn-host-aktif:active {
+    background: #c8e6d4;
+}
+
+.btn-host-blokir {
+    background: #fde8e8;
+    color: #b91c1c;
+}
+
+.btn-host-blokir:active {
+    background: #fad0d0;
+}
+
+.btn-host-hapus {
+    flex: 0.4;
+    background: #f1f3f7;
+    color: #4b5c7a;
+}
+
+.btn-host-hapus:active {
+    background: #e2e6ef;
+}
+
+/* ============================================
+   RESPONSIVE FIX
+   ============================================ */
+@media (max-width: 400px) {
+    .host-name {
+        font-size: 17px;
+    }
+
+    .host-info-item {
+        font-size: 13px;
+    }
+
+    .host-info-item .label {
+        min-width: 60px;
+    }
+
+    .btn-host {
+        font-size: 12px;
+        padding: 8px 0;
+    }
+
+    .host-actions {
+        gap: 6px;
+    }
+
+    .host-info-item .login-time {
+        font-size: 11px;
+        padding: 2px 8px;
+    }
+
+    .navbar-title h5 {
+        font-size: 15px;
+    }
+
+    .navbar-title small {
+        font-size: 11px;
+    }
+
+    .btn-back,
+    .btn-refresh {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
 }
